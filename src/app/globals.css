@@ -1,0 +1,33 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #1a2233;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-graphik);
+  --font-display: var(--font-gamay);
+
+  /* Center for Adolescent Wellness — starter palette (provisional).
+     Refine these once the official logo + brand assets are dropped in. */
+  --color-caw-blue: #1b4db3;
+  --color-caw-blue-dark: #10306e;
+  --color-caw-blue-light: #eaf1fc;
+  --color-caw-sky: #4a90d9;
+  --color-caw-ink: #1a2233;
+  --color-caw-gray: #5b6472;
+  --color-caw-gray-light: #eef1f5;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-graphik), system-ui, -apple-system, sans-serif;
+}
