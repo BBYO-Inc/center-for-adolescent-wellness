@@ -25,25 +25,68 @@ const TESTIMONIALS = [
   },
 ];
 
+// Matches the circular icon buttons on the Resources page: pink circle, white
+// glyph, pink glow on hover.
+const arrowStyles =
+  "flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-[#e42158] text-white transition-shadow duration-300 hover:shadow-[0_0_24px_4px_rgba(228,33,88,0.7)]";
+
+function Chevron({ direction }: { direction: "left" | "right" }) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className="h-5 w-5"
+      aria-hidden
+    >
+      <path d={direction === "left" ? "M15 5l-7 7 7 7" : "M9 5l7 7-7 7"} />
+    </svg>
+  );
+}
+
 export function Testimonials() {
   const [index, setIndex] = useState(0);
   const [visible, setVisible] = useState(true);
-  const indexRef = useRef(0);
-  indexRef.current = index;
+  const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
-  const goTo = (next: number) => {
+  // Fades out, swaps the quote, fades back in. `resolve` receives the current
+  // index, so stepping stays correct even mid-fade when state hasn't landed yet.
+  const change = (resolve: (i: number) => number) => {
     setVisible(false);
     setTimeout(() => {
-      setIndex(next);
+      setIndex(resolve);
       setVisible(true);
     }, 300);
   };
 
-  useEffect(() => {
-    const timer = setInterval(() => {
-      goTo((indexRef.current + 1) % TESTIMONIALS.length);
+  const startTimer = () => {
+    if (timerRef.current) clearInterval(timerRef.current);
+    timerRef.current = setInterval(() => {
+      change((i) => (i + 1) % TESTIMONIALS.length);
     }, 10000);
-    return () => clearInterval(timer);
+  };
+
+  // Manual navigation restarts the countdown, so a quote you just chose doesn't
+  // get replaced a moment later by the tail end of the previous cycle.
+  const goToManually = (next: number) => {
+    change(() => next);
+    startTimer();
+  };
+
+  const step = (delta: number) => {
+    change((i) => (i + delta + TESTIMONIALS.length) % TESTIMONIALS.length);
+    startTimer();
+  };
+
+  useEffect(() => {
+    startTimer();
+    return () => {
+      if (timerRef.current) clearInterval(timerRef.current);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const current = TESTIMONIALS[index];
@@ -65,18 +108,38 @@ export function Testimonials() {
         </div>
       </div>
 
-      <div className="mt-6 flex justify-center gap-2">
-        {TESTIMONIALS.map((_, i) => (
-          <button
-            key={i}
-            type="button"
-            onClick={() => goTo(i)}
-            aria-label={`Show testimonial ${i + 1}`}
-            className={`h-2.5 w-2.5 rounded-full transition-colors ${
-              i === index ? "bg-white" : "bg-white/40"
-            }`}
-          />
-        ))}
+      <div className="mt-6 flex items-center justify-center gap-5">
+        <button
+          type="button"
+          onClick={() => step(-1)}
+          aria-label="Previous testimonial"
+          className={arrowStyles}
+        >
+          <Chevron direction="left" />
+        </button>
+
+        <div className="flex gap-2">
+          {TESTIMONIALS.map((_, i) => (
+            <button
+              key={i}
+              type="button"
+              onClick={() => goToManually(i)}
+              aria-label={`Show testimonial ${i + 1}`}
+              className={`h-2.5 w-2.5 rounded-full transition-colors ${
+                i === index ? "bg-white" : "bg-white/40"
+              }`}
+            />
+          ))}
+        </div>
+
+        <button
+          type="button"
+          onClick={() => step(1)}
+          aria-label="Next testimonial"
+          className={arrowStyles}
+        >
+          <Chevron direction="right" />
+        </button>
       </div>
     </div>
   );

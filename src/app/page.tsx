@@ -25,9 +25,9 @@ export default function HomePage() {
           </Reveal>
           <Reveal delay={150}>
             <p className="mx-auto mt-6 max-w-2xl text-lg font-semibold leading-relaxed text-white/90 drop-shadow">
-              BBYO&rsquo;s Center for Adolescent Wellness works with organizations to
-              ensure the youth served in your care are thriving mentally, emotionally,
-              and socially.
+              The BBYO Center for Adolescent Wellness seeks to identify and provide
+              best practices in adolescent health and wellness so that youth-serving
+              organizations can be places where adolescents thrive.
             </p>
           </Reveal>
           <Reveal delay={300}>

@@ -76,7 +76,7 @@ const RESOURCES: { name: string; description: string; href: string; type: Resour
 function ResourceIcon({ type }: { type: ResourceType }) {
   if (type === "video") {
     return (
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" className="h-7 w-7">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" className="h-6 w-6">
         <circle cx="12" cy="12" r="9" />
         <path d="M10.5 9l4.5 3-4.5 3V9z" fill="currentColor" stroke="none" />
       </svg>
@@ -84,14 +84,14 @@ function ResourceIcon({ type }: { type: ResourceType }) {
   }
   if (type === "event") {
     return (
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" className="h-7 w-7">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" className="h-6 w-6">
         <rect x="3.5" y="5" width="17" height="16" rx="2" />
         <path d="M8 3v4M16 3v4M3.5 10h17" />
       </svg>
     );
   }
   return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" className="h-7 w-7">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" className="h-6 w-6">
       <path d="M6 3h9l4 4v13a1 1 0 01-1 1H6a1 1 0 01-1-1V4a1 1 0 011-1z" />
       <path d="M9 9h6M9 13h6M9 17h4" />
     </svg>
@@ -113,9 +113,9 @@ export default function ResourcesPage() {
         </Reveal>
         <Reveal delay={100}>
           <p className="mt-6 px-4 text-lg leading-relaxed text-black">
-            BBYO&rsquo;s Center for Adolescent Wellness staff regularly write,
-            speak, and train organizations on how they can ensure youth mental,
-            emotional, and social health and wellness.
+            Members of the BBYO Center for Adolescent Wellness staff regularly
+            write, speak, and train organizations on how they can ensure youth
+            mental, emotional, and social health and wellness.
           </p>
         </Reveal>
         <Reveal delay={200}>
@@ -136,9 +136,11 @@ export default function ResourcesPage() {
                 href={resource.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-start gap-4 rounded-2xl bg-caw-gray-light px-5 py-4 transition-colors hover:bg-caw-blue-light"
+                // Tailwind wraps `hover:` in @media (hover: hover), which never
+                // matches on touch devices — `active:` is what actually fires on tap.
+                className="flex items-start gap-4 rounded-2xl bg-caw-gray-light px-5 py-4 transition-colors hover:bg-[#fbdbe4] active:bg-[#fbdbe4]"
               >
-                <span className="mt-0.5 shrink-0 text-[#e42158]">
+                <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-[#e42158] text-white">
                   <ResourceIcon type={resource.type} />
                 </span>
                 <span>
@@ -162,13 +164,13 @@ export default function ResourcesPage() {
                     Description
                   </th>
                   <th className="px-6 py-4 text-sm font-semibold tracking-normal text-[#e42158]">
-                    Link
+                    Explore
                   </th>
                 </tr>
               </thead>
               <tbody>
                 {RESOURCES.map((resource, i) => {
-                  const rowBg = i % 2 === 1 ? "bg-caw-gray-light" : "bg-white";
+                  const rowBg = i % 2 === 0 ? "bg-caw-gray-light" : "bg-white";
                   return (
                     <tr key={resource.href}>
                       <td
@@ -185,7 +187,7 @@ export default function ResourcesPage() {
                           target="_blank"
                           rel="noopener noreferrer"
                           aria-label={`Open ${resource.name}`}
-                          className="inline-flex text-[#e42158] transition-colors hover:text-black"
+                          className="inline-flex h-11 w-11 items-center justify-center rounded-full bg-[#e42158] text-white transition-shadow duration-300 hover:shadow-[0_0_24px_4px_rgba(228,33,88,0.7)]"
                         >
                           <ResourceIcon type={resource.type} />
                         </a>

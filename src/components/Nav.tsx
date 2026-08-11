@@ -9,6 +9,7 @@ const links = [
   { href: "/about", label: "About Us" },
   { href: "/services", label: "Services" },
   { href: "/resources", label: "Resources" },
+  { href: "/blog", label: "Blog" },
   { href: "/contact", label: "Contact Us" },
 ];
 
@@ -32,13 +33,12 @@ export function Nav() {
       <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
         <Link href="/" className="flex items-center" onClick={() => setOpen(false)}>
           <Image
-            src="/images/shared/caw-logo.svg"
+            src="/images/shared/caw-logo.png"
             alt="BBYO Center for Adolescent Wellness"
-            width={160}
-            height={160}
+            width={1283}
+            height={1224}
             priority
-            unoptimized
-            className="h-20 w-20 sm:h-28 sm:w-28 md:h-40 md:w-40"
+            className="h-20 w-auto sm:h-28 md:h-40"
           />
         </Link>
 

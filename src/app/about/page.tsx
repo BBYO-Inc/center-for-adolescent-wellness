@@ -55,10 +55,11 @@ const STAFF = [
     ],
   },
   {
-    name: "Brandon Bernstein",
+    name: "Rabbi Brandon Bernstein",
     image: "/images/about/staff/brandon-bernstein.jpg",
     bio: [
-      "[Placeholder bio for Brandon Bernstein — replace with final copy.]",
+      "Rabbi Brandon Bernstein has spent his rabbinate exploring ways to discover the intersection between what was and what is, between ancient wisdom and contemporary knowledge. He grew up in the high desert of Southern California in Palmdale, then made his way north to earn a BA in Comparative Literature from the University of California, Berkeley. Since his ordination in 2014 by the Hebrew Union College-Jewish Institute of Religion in New York, he has worked primarily with teens, college students, and young adults, previously serving as Campus Rabbi for multiple Hillels and the Director of Jewish Learning for Moishe House. He currently works as the part-time rabbi of Congregation Beth Shalom in Dekalb, IL and as a Retained Jewish Education Consultant for BBYO.",
+      "Brandon enjoys comic books, short story collections, board games, movies, and communal singing, and he loves to find ways to connect his passions to Judaism. He has taken improv classes in four different cities and used this experience to develop “Yes And Torah,” a workshop that mixes short form improv games with text study. He is the co-host of Funny, They Don’t Look Jewish, a podcast that explores Jewish content within the pages of mainstream superhero comics. And he owns around 200 board games, so he’s pretty sure he can find one you would enjoy playing after a Shabbat meal!",
     ],
   },
   {
@@ -87,7 +88,7 @@ export default function AboutPage() {
       <section className="-mt-[50px] px-6 py-20 text-left sm:px-10 md:px-[100px]">
         <Reveal>
           <h2 className="px-4 text-4xl font-bold text-[#e42158] sm:text-5xl">
-            About BBYO&rsquo;s Center for Adolescent Wellness
+            The BBYO Center for Adolescent Wellness
           </h2>
         </Reveal>
         <Reveal delay={150}>

@@ -7,10 +7,11 @@ export function Accordion({
 }: {
   items: { title: string; content: React.ReactNode }[];
 }) {
-  const [openIndex, setOpenIndex] = useState<number | null>(0);
+  // Starts fully collapsed — no item open until the visitor picks one.
+  const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   return (
-    <div className="divide-y divide-caw-gray-light rounded-2xl border border-caw-gray-light bg-white">
+    <div className="divide-y divide-caw-gray-light rounded-2xl border border-caw-gray-light bg-white shadow-[0_30px_60px_-12px_rgba(13,22,58,0.35)]">
       {items.map((item, i) => {
         const isOpen = openIndex === i;
         return (

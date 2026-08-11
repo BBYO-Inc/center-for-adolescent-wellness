@@ -1,6 +1,8 @@
+import Link from "next/link";
 import { Accordion } from "@/components/Accordion";
 import { PageHeader } from "@/components/PageHeader";
 import { Reveal } from "@/components/Reveal";
+import { WellnessAssessmentTool } from "@/components/WellnessAssessmentTool";
 
 export const metadata = {
   title: "Services | Center for Adolescent Wellness",
@@ -86,16 +88,8 @@ const ACCORDION_ITEMS = [
     content: (
       <ul className="list-disc space-y-2 pl-5">
         <li>
-          Utilize our custom{" "}
-          <a
-            href="https://www.centerforadolescentwellness.org/s/FY21_Wellness__Inclusion_Youth_Wellness_Assessment_10_09_20_v2_2.pdf"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="font-semibold text-[#e42158] underline decoration-2 underline-offset-2 hover:text-black"
-          >
-            Wellness Assessment Tool
-          </a>{" "}
-          to analyze mental, emotional, and social health policies and procedures
+          Utilize our custom <WellnessAssessmentTool /> to analyze mental,
+          emotional, and social health policies and procedures
         </li>
         <li>
           Evaluate how current policies, procedures, and training align to create
@@ -175,17 +169,24 @@ export default function ServicesPage() {
         title="Services"
         image="/images/services/hero.png"
       />
-      <section className="-mt-[50px] px-6 py-20 text-left sm:px-10 md:px-[100px]">
+      <section className="-mt-[50px] px-6 pb-16 pt-20 text-left sm:px-10 md:px-[100px]">
         <Reveal>
           <h2 className="px-4 text-4xl font-bold text-[#e42158] sm:text-5xl">What We Offer</h2>
         </Reveal>
         <Reveal delay={100}>
           <p className="mt-6 px-4 text-lg leading-relaxed text-black">
-            The BBYO Center for Adolescent Wellness (BBYO-CAW) ensures that
+            The BBYO Center for Adolescent Wellness ensures that
             youth-serving organizations are places where all youth thrive. BBYO-CAW
             has the tools, resources, and training to make this possible with the
             below services. To request a service, package, or quote, please contact
-            Drew Fidler, Executive Director of BBYO-CAW.
+            Drew Fidler at{" "}
+            <a
+              href="mailto:dfidler@bbyo.org"
+              className="font-semibold text-[#e42158] underline decoration-2 underline-offset-2 hover:text-black"
+            >
+              dfidler@bbyo.org
+            </a>
+            .
           </p>
         </Reveal>
         <Reveal delay={200}>
@@ -202,20 +203,26 @@ export default function ServicesPage() {
           </div>
         </Reveal>
         <Reveal delay={300}>
-          <div className="mt-8 px-4">
-            <Accordion items={ACCORDION_ITEMS} />
-          </div>
-        </Reveal>
-        <Reveal delay={400}>
           <div className="mt-10 px-4">
-            <a
-              href="https://www.centerforadolescentwellness.org/contact-us"
-              target="_blank"
-              rel="noopener noreferrer"
+            <Link
+              href="/contact"
               className="inline-block rounded-full bg-[#e42158] px-8 py-3 text-base font-semibold text-white transition-shadow duration-300 hover:shadow-[0_0_24px_4px_rgba(228,33,88,0.7)]"
             >
               Request Services
-            </a>
+            </Link>
+          </div>
+        </Reveal>
+      </section>
+
+      {/* Full-bleed cyan band. Carries the same horizontal padding as the section
+          above so the accordion lines up with the copy. */}
+      <section className="bg-[#00d7eb] px-6 py-16 text-left sm:px-10 md:px-[100px]">
+        <Reveal>
+          <div className="px-4">
+            <h3 className="text-3xl font-bold text-white sm:text-4xl">Learn More</h3>
+            <div className="mt-8">
+              <Accordion items={ACCORDION_ITEMS} />
+            </div>
           </div>
         </Reveal>
       </section>
