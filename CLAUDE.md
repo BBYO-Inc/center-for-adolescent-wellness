@@ -161,16 +161,44 @@ Filenames are lowercase-with-hyphens (`brandon-bernstein.jpg`, `camp-harlam.png`
 
 ## Deploy
 
-GitHub-linked Vercel project — **pushing to `main` redeploys automatically.**
-Only push when Ryan asks.
+**Publishing is a Vercel CLI deploy run by Claude.** When Ryan says "publish it":
 
 ```bash
-git add -A && git commit -m "message" && git push
+cd /Users/ryanladd/Documents/Claude/center-for-adolescent-wellness && npx --yes vercel@latest --prod --yes
 ```
 
-Git identity on this Mac is Ryan Ladd / ryan.ladd10@gmail.com. The GitHub token in
-the macOS keychain is a fine-grained PAT scoped to existing repos — it can push but
-**cannot create repos or change visibility** (403). That's why this repo is public.
+Takes ~1 min. Always verify the public URL afterwards rather than assuming success.
+
+- **Public link to share:** https://center-for-adolescent-wellness.vercel.app — same
+  on every deploy, no auth wall. Vercel's `...-git-main-...` and hashed URLs sit
+  behind a Vercel login; never hand those out.
+- Vercel CLI is authenticated on this Mac as `ryanladd10-3726`, org
+  `ryan-ladds-projects`. Ryan did the interactive login himself — never handle
+  Vercel or GitHub tokens.
+- The folder is linked to the existing Vercel project via `.vercel/project.json`
+  (git-ignored). Don't create a second project.
+- **This deploys the LOCAL folder, not GitHub.** Uncommitted changes go live, and
+  the repo is no longer the record of what's live.
+
+### Why not push-to-deploy
+
+The repo was transferred to the **`rl-bbyo` personal GitHub account** on 2026-08-12,
+which broke both halves of the old flow:
+
+1. `ryan-ladd` gets **403** pushing to it — the keychain PAT is a fine-grained token
+   scoped to repos that account owns, and it no longer owns this one.
+2. Vercel **cannot connect** it: for a repo owned by a *personal* account you must be
+   the repo Owner. Collaborator access is explicitly not enough. Org-owned repos are
+   fine.
+
+**Open recommendation:** move the repo into a **GitHub organization** (check with BBYO
+IT whether one exists). That restores push access via org membership and lets Ryan's
+existing Vercel account reconnect — no second Vercel account. GitHub and Vercel are
+both BBYO-sanctioned platforms, so either path is on-policy.
+
+Git identity on this Mac is Ryan Ladd / ryan.ladd10@gmail.com. Repo:
+https://github.com/rl-bbyo/center-for-adolescent-wellness (public; the old
+`ryan-ladd` URL 301-redirects to it).
 The custom domain is not attached yet; the real site is still Squarespace.
 
 ## Known issues / open work

@@ -22,9 +22,13 @@ yarn-error.log*
 # local env files
 .env*.local
 
+# vercel CLI link (contains project + org IDs — repo is public)
+.vercel
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts
 
 # design source assets (not used by the deployed site)
 /Brand
+.env*
