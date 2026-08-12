@@ -11,7 +11,7 @@ export function Accordion({
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   return (
-    <div className="divide-y divide-caw-gray-light rounded-2xl border border-caw-gray-light bg-white shadow-[0_30px_60px_-12px_rgba(13,22,58,0.35)]">
+    <div className="divide-y divide-caw-gray-light overflow-hidden rounded-2xl border border-caw-gray-light bg-white shadow-[0_30px_60px_-12px_rgba(13,22,58,0.35)]">
       {items.map((item, i) => {
         const isOpen = openIndex === i;
         return (
@@ -20,15 +20,17 @@ export function Accordion({
               type="button"
               onClick={() => setOpenIndex(isOpen ? null : i)}
               aria-expanded={isOpen}
-              className="flex w-full items-center justify-between gap-4 px-6 py-5 text-left"
+              className="group flex w-full cursor-pointer items-center justify-between gap-4 px-6 py-5 text-left transition-colors duration-200 hover:bg-[#fdeef3]"
             >
-              <span className="text-xl font-bold text-black">{item.title}</span>
+              <span className="text-xl font-bold text-black transition-colors duration-200 group-hover:text-[#e42158]">
+                {item.title}
+              </span>
               <svg
                 viewBox="0 0 24 24"
                 fill="none"
                 stroke="currentColor"
                 strokeWidth="2.5"
-                className={`h-5 w-5 shrink-0 text-[#e42158] transition-transform duration-300 ${
+                className={`h-5 w-5 shrink-0 text-[#e42158] transition-transform duration-300 group-hover:scale-125 ${
                   isOpen ? "rotate-180" : ""
                 }`}
                 aria-hidden

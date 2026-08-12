@@ -47,7 +47,6 @@ const PARTNERS = [
 const STAFF = [
   {
     name: "Drew Fidler, LCSW-C",
-    role: "Executive Director",
     image: "/images/about/staff/drew-fidler.png",
     bio: [
       "Drew Fidler, LCSW-C, is the Executive Director of the BBYO Center for Adolescent Wellness, where she helps ensure that BBYO and other Youth Serving Organizations are places where youth can thrive through institutional best practices in health, wellness, and child protection. Drew is dedicated to making youth-serving organizations safer and healthier for participants.",
@@ -144,11 +143,6 @@ export default function AboutPage() {
                     />
                   </div>
                   <h3 className="mt-[22px] text-2xl font-bold text-black">{person.name}</h3>
-                  {person.role && (
-                    <p className="mt-3 rounded-full border-2 border-[#e42158] px-4 py-1 text-sm font-semibold text-[#e42158]">
-                      {person.role}
-                    </p>
-                  )}
                   <div className="mt-4 w-full space-y-4 text-left text-base leading-relaxed text-black">
                     {person.bio.map((paragraph, j) => (
                       <p key={j}>{paragraph}</p>

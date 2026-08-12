@@ -58,13 +58,6 @@ const RESOURCES: { name: string; description: string; href: string; type: Resour
     type: "article",
   },
   {
-    name: "Good Deeds Day",
-    description:
-      "Live Q&A on navigating COVID-19 pandemic challenges while remaining engaged in volunteer work.",
-    href: "https://www.facebook.com/GoodDeedsDayInternational/videos/299534018088551/",
-    type: "video",
-  },
-  {
     name: "Overcoming Mental Health Challenges: Break the Stigma",
     description:
       "Stories of overcoming anxiety, depression, and other challenges young people face, and exploring community support.",
@@ -157,13 +150,13 @@ export default function ResourcesPage() {
             <table className="w-full min-w-[640px] border-separate border-spacing-y-2 text-left">
               <thead>
                 <tr>
-                  <th className="px-6 py-4 text-sm font-semibold tracking-normal text-[#e42158]">
+                  <th className="px-6 py-4 text-lg font-semibold tracking-normal text-[#e42158]">
                     Name
                   </th>
-                  <th className="px-6 py-4 text-sm font-semibold tracking-normal text-[#e42158]">
+                  <th className="px-6 py-4 text-lg font-semibold tracking-normal text-[#e42158]">
                     Description
                   </th>
-                  <th className="px-6 py-4 text-sm font-semibold tracking-normal text-[#e42158]">
+                  <th className="px-6 py-4 text-lg font-semibold tracking-normal text-[#e42158]">
                     Explore
                   </th>
                 </tr>
