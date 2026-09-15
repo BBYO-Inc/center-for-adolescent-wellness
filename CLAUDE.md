@@ -5,8 +5,8 @@ Squarespace site. Read this file first — it should be enough to start work wit
 re-exploring the codebase.
 
 - **Live site being replaced:** https://www.centerforadolescentwellness.org/
-- **New site (preview):** https://center-for-adolescent-wellness.vercel.app
-- **GitHub:** https://github.com/ryan-ladd/center-for-adolescent-wellness (public)
+- **GitHub:** https://github.com/BBYO-Inc/center-for-adolescent-wellness (public, org-owned)
+- **Vercel:** `chip-wares-projects` team — see **Deploy** for URLs and the SSO wall
 - **Local:** `/Users/ryanladd/Documents/Claude/center-for-adolescent-wellness`
 - Started 2026-07-21. Ryan is a non-coder — keep explanations plain and non-technical.
 
@@ -128,7 +128,7 @@ rounded pills.
 | **About** | Intro copy, Meet the Team (4 people), testimonials over a photo, 34 partner logos | Real bios, all final |
 | **Services** | What We Offer, audience list, 4-item accordion, Request Services button | 8 trainings nested in the accordion |
 | **Resources** | Articles & Media intro + 9 links | Table on desktop, cards below `md` |
-| **Contact** | Contact form only | **Form does not actually send anything** |
+| **Contact** | Drew Fidler card — headshot, title, copy, `mailto:` "Connect" button | Form is hidden, see Known issues #1 |
 
 **Staff currently shown:** Drew Fidler (Executive Director), Rabbi Brandon
 Bernstein, Jennifer Ferris-Glick, Michal Berkson Powell. Photos for Andy Harkavy,
@@ -161,51 +161,56 @@ Filenames are lowercase-with-hyphens (`brandon-bernstein.jpg`, `camp-harlam.png`
 
 ## Deploy
 
-**Publishing is a Vercel CLI deploy run by Claude.** When Ryan says "publish it":
+**Publishing is `git push`.** The Vercel project is connected to the GitHub repo, so
+pushing `main` builds and deploys automatically (~40s).
 
 ```bash
-cd /Users/ryanladd/Documents/Claude/center-for-adolescent-wellness && npx --yes vercel@latest --prod --yes
+git push origin main
 ```
 
-Takes ~1 min. Always verify the public URL afterwards rather than assuming success.
+- **Repo:** `BBYO-Inc/center-for-adolescent-wellness`. Old `rl-bbyo/...` and
+  `ryan-ladd/...` URLs 301-redirect here.
+- **Vercel:** project in the **`chip-wares-projects`** team (Pro). Personal-sounding
+  name, but this is BBYO's web hosting — `bbyo-regions`, `ic-shuk-site` and
+  `bbyo-utils-site` live there too.
+- Commits here are authored as `rladd@bbyo.org` via a **repo-local** `user.email`.
+  The Mac's global git identity is still Ryan's personal Gmail, and
+  `credential.useHttpPath=true` is set globally so the `rl-bbyo` (BBYO) and
+  `ryan-ladd` (personal) GitHub logins coexist. `rl-bbyo` is Ryan's **BBYO** account.
+- Always confirm the deployment reached `READY`; don't assume a push succeeded.
 
-- **Public link to share:** https://center-for-adolescent-wellness.vercel.app — same
-  on every deploy, no auth wall. Vercel's `...-git-main-...` and hashed URLs sit
-  behind a Vercel login; never hand those out.
-- Vercel CLI is authenticated on this Mac as `ryanladd10-3726`, org
-  `ryan-ladds-projects`. Ryan did the interactive login himself — never handle
-  Vercel or GitHub tokens.
-- The folder is linked to the existing Vercel project via `.vercel/project.json`
-  (git-ignored). Don't create a second project.
-- **This deploys the LOCAL folder, not GitHub.** Uncommitted changes go live, and
-  the repo is no longer the record of what's live.
+### URLs and the SSO wall
 
-### Why not push-to-deploy
+- **Every `.vercel.app` URL 302s to a Vercel login.** The project is set to
+  `ssoProtection: all_except_custom_domains`. This is deliberate — do **not** disable
+  it. A `bbyo.org` custom domain is exempt and is the intended public entry point;
+  BBYO IT was attaching one as of 2026-09-15.
+- Because of that wall Claude **cannot fetch the rendered pages** (Vercel's own
+  authenticated fetch tool fails on it too). **Verify deploys at the git-source
+  level** — confirm the built commit contains the change — and have Ryan look.
+- **https://center-for-adolescent-wellness.vercel.app is the OLD project**, in Ryan's
+  personal Vercel team. It still serves the public and is **not** updated by pushes.
+  Don't delete it until the custom domain is live and verified.
 
-The repo was transferred to the **`rl-bbyo` personal GitHub account** on 2026-08-12,
-which broke both halves of the old flow:
+### History
 
-1. `ryan-ladd` gets **403** pushing to it — the keychain PAT is a fine-grained token
-   scoped to repos that account owns, and it no longer owns this one.
-2. Vercel **cannot connect** it: for a repo owned by a *personal* account you must be
-   the repo Owner. Collaborator access is explicitly not enough. Org-owned repos are
-   fine.
+Before 2026-09-15 this deployed via `npx vercel --prod` from the local folder under
+Ryan's personal account, because the repo sat on a personal GitHub account that Vercel
+refused to connect. All resolved — don't reintroduce the CLI flow.
 
-**Open recommendation:** move the repo into a **GitHub organization** (check with BBYO
-IT whether one exists). That restores push access via org membership and lets Ryan's
-existing Vercel account reconnect — no second Vercel account. GitHub and Vercel are
-both BBYO-sanctioned platforms, so either path is on-policy.
-
-Git identity on this Mac is Ryan Ladd / ryan.ladd10@gmail.com. Repo:
-https://github.com/rl-bbyo/center-for-adolescent-wellness (public; the old
-`ryan-ladd` URL 301-redirects to it).
-The custom domain is not attached yet; the real site is still Squarespace.
+Ryan is a non-coder: keep publishing instructions plain and prefer running commands for
+him. Never handle Vercel or GitHub tokens — he does interactive logins himself.
 
 ## Known issues / open work
 
-1. **Contact form is a dead end.** `ContactForm.tsx` validates fields and shows a
-   "Thank you!" message, but nothing is sent — no email, no API route, no database.
-   This must be wired up before launch.
+1. **Contact form is hidden, not fixed.** `ContactForm.tsx` still exists but is no
+   longer imported anywhere. It validated fields, showed a "Thank you!" message and
+   then silently discarded the submission — visitors were told they'd been heard when
+   nothing was sent. `contact/page.tsx` now shows a Drew Fidler card instead.
+   Rebuild it on an approved tool: **Jotform** (external forms) or **FormAssembly**
+   (if inquiries should become Salesforce records); both email submissions to a
+   nominated address. Do **not** hand-roll an API route with SendGrid/Resend/SMTP —
+   BBYO sends transactional email through Marketing Cloud.
 2. **Hero images are enormous.** The page hero PNGs run 6–19MB each
    (contact 19MB, resources 15MB, services 14MB). Next optimizes what it serves,
    but these bloat the repo and slow builds. Worth compressing at source.
@@ -214,8 +219,11 @@ The custom domain is not attached yet; the real site is still Squarespace.
    `public/` and served from this site before the Squarespace site goes away.
    (The "Request Services" button used to have the same problem; it was pointed
    at `/contact` on 2026-08-10.)
-4. **Uncommitted work in progress** (as of 2026-08-10): Rabbi Brandon Bernstein's
-   real bio + a new 1MB headshot on the About page. Compress the photo before pushing.
+4. **Favicon:** `src/app/icon.png` (48px, 3KB) copied from
+   `Brand/Graphics/CAW Favicon.png`; Next.js picks it up by filename convention.
+   The sibling **`CAW Favicon.svg` is broken** — 740KB with 12 embedded rasters, and
+   it renders with clip-path artifacts (stray arc, broken rim) at every size in every
+   renderer tested. Don't switch to it without a clean re-export.
 5. `public/images/home/hero.png` is unused — the homepage uses `hero-subpage.png`.
 6. Footer address is **PO Box 14540, Washington, DC 20004 · (202) 857-6563**.
    The old site listed a street address; confirm which is current before changing.
@@ -225,7 +233,7 @@ The custom domain is not attached yet; the real site is still Squarespace.
 - **Screenshots of the preview pane render blank below the YouTube iframe** and
   won't capture lazy-loaded card images. Verify those with DOM/JS reads or in real
   Chrome — don't trust a blank screenshot as a bug.
-- Only **one commit** exists in this repo's history (`f7ef39b`), so `git log` is not
-  a useful record of past decisions. This file is the record.
+- `git log` is a real record again as of 2026-09-15 (it was a single commit for a long
+  time). This file is still the place for decisions and rationale.
 - Tailwind v4 — the palette is defined in `@theme inline` inside `globals.css`,
   not in a `tailwind.config.js` (there isn't one).
