@@ -21,7 +21,7 @@ export function ContactForm() {
 
   if (submitted) {
     return (
-      <div className="rounded-2xl border border-caw-gray-light bg-caw-blue-light px-8 py-10 text-center">
+      <div className="rounded-2xl border border-caw-gray-light bg-[#fbdbe4] px-8 py-10 text-center">
         <p className="text-xl font-bold text-black">Thank you!</p>
         <p className="mt-2 text-black">
           Your request has been received. Our team will be in touch soon.

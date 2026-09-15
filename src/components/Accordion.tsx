@@ -44,9 +44,9 @@ export function Accordion({
               }`}
             >
               <div className="overflow-hidden">
-                {/* No top padding — the button's py-6 already puts 24px above the body
-                    text, matching pb-6 below it and the 24px above the title. */}
-                <div className="px-6 pb-6 text-base leading-relaxed text-black">
+                {/* pt-6 sits on top of the button's own pb-6, so the body text gets
+                    visibly more breathing room below the title than the flush 24px. */}
+                <div className="px-6 pb-6 pt-6 text-base leading-relaxed text-black">
                   {item.content}
                 </div>
               </div>
