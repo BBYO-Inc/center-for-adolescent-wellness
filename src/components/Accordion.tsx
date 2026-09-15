@@ -20,7 +20,7 @@ export function Accordion({
               type="button"
               onClick={() => setOpenIndex(isOpen ? null : i)}
               aria-expanded={isOpen}
-              className="group flex w-full cursor-pointer items-center justify-between gap-4 px-6 py-5 text-left transition-colors duration-200 hover:bg-[#fdeef3]"
+              className="group flex w-full cursor-pointer items-center justify-between gap-4 px-6 py-6 text-left transition-colors duration-200 hover:bg-[#fdeef3]"
             >
               <span className="text-xl font-bold text-black transition-colors duration-200 group-hover:text-[#e42158]">
                 {item.title}
@@ -44,6 +44,8 @@ export function Accordion({
               }`}
             >
               <div className="overflow-hidden">
+                {/* No top padding — the button's py-6 already puts 24px above the body
+                    text, matching pb-6 below it and the 24px above the title. */}
                 <div className="px-6 pb-6 text-base leading-relaxed text-black">
                   {item.content}
                 </div>

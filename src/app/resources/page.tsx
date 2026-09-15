@@ -47,8 +47,8 @@ const RESOURCES: { name: string; description: string; href: string; type: Resour
     name: "Drew Fidler Honored by Jewish Federation of Greater Washington",
     description:
       "Recognition of the BBYO-CAW Director among Capital Chai Award honorees for leadership impact.",
-    href: "https://www.shalomdc.org/meet-federations-capital-chai-honorees/",
-    type: "event",
+    href: "https://www.prweb.com/releases/recognizing-the-next-generation-of-jewish-leaders-the-jewish-federation-of-greater-washington-celebrates-inaugural-capital-chai-awards-872468183.html",
+    type: "article",
   },
   {
     name: "Utilizing Teen Mental Health First Aid Training to Develop Peer Advocates",

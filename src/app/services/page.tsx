@@ -160,6 +160,27 @@ const ACCORDION_ITEMS = [
       </p>
     ),
   },
+  {
+    title: "Presentations",
+    content: (
+      <div className="space-y-4">
+        <p>
+          Team members from BBYO’s Center for Adolescent Wellness regularly present at
+          industry events like Camp Collab, the American Camp Association Tri-State
+          Conference, and the Foundation for Jewish Camps Conference.
+        </p>
+        <p>
+          <Link
+            href="/contact"
+            className="font-semibold text-[#e42158] underline decoration-2 underline-offset-2 transition-colors hover:text-black"
+          >
+            Contact us
+          </Link>{" "}
+          to schedule a conference speaker or to see us speak live.
+        </p>
+      </div>
+    ),
+  },
 ];
 
 export default function ServicesPage() {
