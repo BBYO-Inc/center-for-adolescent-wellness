@@ -36,7 +36,7 @@ export default function HomePage() {
                 href="/contact"
                 className="inline-block rounded-full bg-white px-8 py-3 text-base font-semibold text-[#e42158] transition-shadow duration-300 hover:shadow-[0_0_60px_16px_rgba(248,249,10,0.7)]"
               >
-                Contact Us
+                Get in Touch
               </Link>
             </div>
           </Reveal>
